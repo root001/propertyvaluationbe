@@ -18,7 +18,7 @@ import static com.mcb.abdulbasit.valuation.constant.AppConstants.USER;
 @RequiredArgsConstructor
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     /**
      * findAllUsers
@@ -36,11 +36,11 @@ public class UserController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<User> findUser(@PathVariable String id) {
-        return ResponseEntity.ok(userService.getUser(Long.getLong(id)) );
+        return ResponseEntity.ok(userService.getUser(Integer.getInteger(id)) );
     }
 
     @GetMapping("/save")
-    public User save() {
-        return userService.save();
+    public ResponseEntity<User> save() {
+        return ResponseEntity.ok(userService.save() );
     }
 }

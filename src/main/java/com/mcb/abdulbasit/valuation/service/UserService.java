@@ -16,8 +16,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
 
-    private UserRepository userRepository;
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * getAllUsers
@@ -32,7 +32,7 @@ public class UserService {
      * @param id
      * @return
      */
-    public User getUser(Long id){
+    public User getUser(Integer id){
         Optional<User> user = userRepository.findById(id);
         if(!user.isPresent()){
             // return no user custom error msg
