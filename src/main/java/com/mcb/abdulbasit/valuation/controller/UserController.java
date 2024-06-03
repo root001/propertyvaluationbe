@@ -2,6 +2,7 @@ package com.mcb.abdulbasit.valuation.controller;
 
 import com.mcb.abdulbasit.valuation.model.Users;
 import com.mcb.abdulbasit.valuation.service.UserService;
+import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,8 @@ public class UserController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Users> findUser(@PathVariable String id) {
+        if(StringUtils.isEmpty(id) )
+        throw new IllegalArgumentException("Illegal id provided.");
         return ResponseEntity.ok(userService.getUser(Integer.getInteger(id)) );
     }
 
