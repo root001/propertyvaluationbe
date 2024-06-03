@@ -17,12 +17,10 @@ public class ResponseExceptionHandler {
     }
 
     @ExceptionHandler({NotFoundException.class})
-    protected ResponseEntity<ErrorPayload> handleNotFoundException(NotFoundException exception, Locale locale) {
+    protected ResponseEntity<ErrorPayload> handleNotFoundException(NotFoundException exception, Locale locale){
         String messageCode = exception.getMessage();
-        Object[] args = exception.get();
-
+        Object [] args = exception.getArgs();
         String message = messageSource.getMessage(messageCode, args, locale);
-
         return ResponseEntity.badRequest().body(new ErrorPayload(String.valueOf(HttpStatus.NOT_FOUND.value()), message));
     }
 }

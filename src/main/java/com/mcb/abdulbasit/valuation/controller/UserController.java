@@ -20,13 +20,27 @@ public class UserController {
 
     private UserService userService;
 
-    @GetMapping()
+    /**
+     * findAllUsers
+     * @return
+     */
+    @GetMapping
     public ResponseEntity<List<User>> findAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
+    /**
+     * findUser
+     * @param id
+     * @return
+     */
     @GetMapping("/{id}")
     public ResponseEntity<User> findUser(@PathVariable String id) {
         return ResponseEntity.ok(userService.getUser(Long.getLong(id)) );
+    }
+
+    @GetMapping("/save")
+    public User save() {
+        return userService.save();
     }
 }

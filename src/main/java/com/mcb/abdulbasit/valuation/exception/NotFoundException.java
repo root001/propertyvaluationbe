@@ -1,8 +1,5 @@
 package com.mcb.abdulbasit.valuation.exception;
 
-import lombok.Getter;
-
-@Getter
 public class NotFoundException extends RuntimeException {
     private final Object[] args;
 
@@ -12,5 +9,14 @@ public class NotFoundException extends RuntimeException {
         super(message);
         this.message = message;
         this.args = args;
+    }
+
+    public Object[] getArgs() {
+        return args;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
     }
 }
