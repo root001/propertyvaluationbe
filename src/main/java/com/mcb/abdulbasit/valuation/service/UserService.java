@@ -2,6 +2,7 @@ package com.mcb.abdulbasit.valuation.service;
 
 import com.mcb.abdulbasit.valuation.model.Users;
 import com.mcb.abdulbasit.valuation.repository.UserRepository;
+import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,17 +31,23 @@ public class UserService {
      * @return
      */
     public Users getUser(Integer id){
+        if(id > 0)
+            throw new IllegalArgumentException("user id cannot be null or empty.");
         Optional<Users> user = userRepository.findById(id);
         if(!user.isPresent()){
             // return no user custom error msg
+            throw new UsernameNotFoundException("Users not found");
         }
         return user.get();
     }
 
     public Users getUserByUsername(String username){
+        if(StringUtils.isEmpty(username))
+            throw new IllegalArgumentException("username cannot be null or empty.");
         Optional<Users> user = userRepository.findByUsername(username);
         if(!user.isPresent()){
             // return no user custom error msg
+            throw new UsernameNotFoundException("Users not found");
         }
         return user.get();
     }

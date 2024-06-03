@@ -1,4 +1,6 @@
 package com.mcb.abdulbasit.valuation.model;
 
-public record AuthRequest(String username, String password) {
+import jakarta.validation.constraints.NotNull;
+
+public record AuthRequest(@NotNull String username, @NotNull String password) {
 }
