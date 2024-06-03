@@ -13,7 +13,7 @@ import lombok.*;
 public class Comment extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Users user;
     @NonNull
     private String body;
 

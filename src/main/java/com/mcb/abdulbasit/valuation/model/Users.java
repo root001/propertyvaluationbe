@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class User extends BaseEntity implements UserDetails{
+public class Users extends BaseEntity implements UserDetails{
     @NonNull
     private String username;
     @NonNull

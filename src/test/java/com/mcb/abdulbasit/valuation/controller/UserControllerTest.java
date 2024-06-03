@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mcb.abdulbasit.valuation.config.AppTestConfig;
 import com.mcb.abdulbasit.valuation.exception.ResponseExceptionHandler;
-import com.mcb.abdulbasit.valuation.model.User;
+import com.mcb.abdulbasit.valuation.model.Users;
 import com.mcb.abdulbasit.valuation.service.UserService;
 import com.mcb.abdulbasit.valuation.util.EasyRandomUtils;
 import org.assertj.core.api.Assertions;
@@ -21,7 +21,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.mockito.Mockito.when;
@@ -53,7 +52,7 @@ class UserControllerTest {
 
     @Test
     void given_that_users_exist_return_all_users() throws Exception {
-        List<User> userList = EasyRandomUtils.mock(User.class, 5);
+        List<Users> userList = EasyRandomUtils.mock(Users.class, 5);
 
         when(userService.getAllUsers()).thenReturn(userList);
         final var result = mockMvc.perform(get("/api/v1/users", someid)
@@ -63,7 +62,7 @@ class UserControllerTest {
                 .andExpect(status().is2xxSuccessful())
                 .andReturn();
 
-        final var responseList = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<User>>() {
+        final var responseList = mapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<Users>>() {
         });
 
         Assertions.assertThat(responseList.size()).isEqualTo(userList.size());

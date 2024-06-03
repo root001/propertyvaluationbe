@@ -1,7 +1,7 @@
 package com.mcb.abdulbasit.valuation.service;
 
 import com.mcb.abdulbasit.valuation.enums.Role;
-import com.mcb.abdulbasit.valuation.model.User;
+import com.mcb.abdulbasit.valuation.model.Users;
 import com.mcb.abdulbasit.valuation.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,7 +23,7 @@ public class UserService {
      * getAllUsers
      * @return
      */
-    public List<User> getAllUsers(){
+    public List<Users> getAllUsers(){
         return userRepository.findAll();
     }
 
@@ -32,16 +32,16 @@ public class UserService {
      * @param id
      * @return
      */
-    public User getUser(Integer id){
-        Optional<User> user = userRepository.findById(id);
+    public Users getUser(Integer id){
+        Optional<Users> user = userRepository.findById(id);
         if(!user.isPresent()){
             // return no user custom error msg
         }
         return user.get();
     }
 
-    public User getUserByUsername(String username){
-        Optional<User> user = userRepository.findByUsername(username);
+    public Users getUserByUsername(String username){
+        Optional<Users> user = userRepository.findByUsername(username);
         if(!user.isPresent()){
             // return no user custom error msg
         }
@@ -50,23 +50,11 @@ public class UserService {
 
     public UserDetailsService userDetailsService() {
         return username -> {
-            User user = getUserByUsername(username);
-            if (!username.equals(user.getUsername())) throw new UsernameNotFoundException("User not found");
+            Users user = getUserByUsername(username);
+            if (!username.equals(user.getUsername())) throw new UsernameNotFoundException("Users not found");
 
-            return new User(username, user.getPassword());
+            return new Users(username, user.getPassword());
         };
-    }
-
-    public User save(){
-        // encrypt user password
-        String encryptedPwd = bCryptPasswordEncoder.encode("admin");
-        User user = new User();
-        user.setUsername("admin");
-        user.setFullname("John Doe");
-        user.setBusinessUnit("Ebene BU - RB000235");
-        user.setContactNumber("9034 8721");
-        user.setPassword(encryptedPwd);
-        return userRepository.save(user);
     }
 
 }

@@ -1,13 +1,12 @@
 package com.mcb.abdulbasit.valuation.common;
 
-import com.mcb.abdulbasit.valuation.model.User;
+import com.mcb.abdulbasit.valuation.model.Users;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
@@ -28,7 +27,7 @@ public class JwtHelperImpl implements JwtHelper{
     }
 
     @Override
-    public String generateTokenForUser(User userDetails) {
+    public String generateTokenForUser(Users userDetails) {
         return Jwts.builder().setClaims(new HashMap<>()).setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
@@ -36,7 +35,7 @@ public class JwtHelperImpl implements JwtHelper{
     }
 
     @Override
-    public boolean authenticateByToken(String token, User userDetails) {
+    public boolean authenticateByToken(String token, Users userDetails) {
         final String userName = extractUserNameFromToken(token);
         return (userName.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }

@@ -1,6 +1,6 @@
 package com.mcb.abdulbasit.valuation.controller;
 
-import com.mcb.abdulbasit.valuation.model.User;
+import com.mcb.abdulbasit.valuation.model.Users;
 import com.mcb.abdulbasit.valuation.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class UserController {
      * @return
      */
     @GetMapping
-    public ResponseEntity<List<User>> findAllUsers() {
+    public ResponseEntity<List<Users>> findAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
@@ -35,12 +35,8 @@ public class UserController {
      * @return
      */
     @GetMapping("/{id}")
-    public ResponseEntity<User> findUser(@PathVariable String id) {
+    public ResponseEntity<Users> findUser(@PathVariable String id) {
         return ResponseEntity.ok(userService.getUser(Integer.getInteger(id)) );
     }
 
-    @GetMapping("/save")
-    public ResponseEntity<User> save() {
-        return ResponseEntity.ok(userService.save() );
-    }
 }

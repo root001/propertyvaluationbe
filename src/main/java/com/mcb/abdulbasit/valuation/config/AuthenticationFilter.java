@@ -1,7 +1,7 @@
 package com.mcb.abdulbasit.valuation.config;
 
 import com.mcb.abdulbasit.valuation.common.JwtHelper;
-import com.mcb.abdulbasit.valuation.model.User;
+import com.mcb.abdulbasit.valuation.model.Users;
 import com.mcb.abdulbasit.valuation.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -41,7 +41,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         username = jwtHelper.extractUserNameFromToken(jwt);
 
         if (!username.isEmpty() && SecurityContextHolder.getContext().getAuthentication() == null) {
-            User userDetails = userService.getUserByUsername(username);
+            Users userDetails = userService.getUserByUsername(username);
 
             if (jwtHelper.authenticateByToken(jwt, userDetails)) {
                 SecurityContext context = SecurityContextHolder.createEmptyContext();
