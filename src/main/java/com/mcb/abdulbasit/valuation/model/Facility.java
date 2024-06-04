@@ -12,19 +12,17 @@ import java.util.List;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Facility extends BaseEntity {
 
-    @Column
     @Enumerated(EnumType.STRING)
     private FacilityType facilityType;
 
-    @Column
     @Enumerated(EnumType.STRING)
     private Catergory catergory;
 
-    @Column
     @Enumerated(EnumType.STRING)
     private FacilityPurpose purpose;
     
@@ -35,7 +33,7 @@ public class Facility extends BaseEntity {
     private Double amount;
     private boolean isHousingLoan;
     private boolean isFosRef;
-    @Column
+
     @Enumerated(EnumType.STRING)
     private ValuationType valuationType;
     private String fosReferenceNo;

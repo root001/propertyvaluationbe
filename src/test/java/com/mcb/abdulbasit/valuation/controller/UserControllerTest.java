@@ -57,7 +57,7 @@ class UserControllerTest {
         List<Users> userList = EasyRandomUtils.mock(Users.class, 5);
 
         when(userService.getAllUsers()).thenReturn(userList);
-        final var result = mockMvc.perform(get("/api/v1/users", someid)
+        final var result = mockMvc.perform(get("/api/v1/users")
                         .contextPath("/api")
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andDo(print())

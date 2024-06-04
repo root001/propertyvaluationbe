@@ -1,7 +1,6 @@
 package com.mcb.abdulbasit.valuation.service;
 
 import com.mcb.abdulbasit.valuation.common.JwtHelper;
-import com.mcb.abdulbasit.valuation.enums.Role;
 import com.mcb.abdulbasit.valuation.model.dto.AuthRequest;
 import com.mcb.abdulbasit.valuation.model.dto.AuthResponse;
 import com.mcb.abdulbasit.valuation.model.Users;
@@ -18,6 +17,11 @@ public class AuthService {
     private final UserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    /**
+     * authenticate
+     * @param authRequest
+     * @return AuthResponse
+     */
     public AuthResponse authenticate(AuthRequest authRequest) {
         //fetch username and password from db
         Users loginUser = userService.getUserByUsername(authRequest.username());

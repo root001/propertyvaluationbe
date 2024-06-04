@@ -1,6 +1,5 @@
 package com.mcb.abdulbasit.valuation.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mcb.abdulbasit.valuation.enums.Role;
 import com.mcb.abdulbasit.valuation.model.Users;
@@ -48,6 +47,11 @@ public class UserService {
         return user.get();
     }
 
+    /**
+     * getUserByUsername
+     * @param username
+     * @return
+     */
     public Users getUserByUsername(String username){
         if(StringUtils.isEmpty(username))
             throw new IllegalArgumentException("username cannot be null or empty.");
@@ -59,6 +63,10 @@ public class UserService {
         return user.get();
     }
 
+    /**
+     * userDetailsService
+     * @return
+     */
     public UserDetailsService userDetailsService() {
         return username -> {
             Users user = getUserByUsername(username);
@@ -68,14 +76,20 @@ public class UserService {
         };
     }
 
-    public Users save() throws Exception {
+    /**
+     * create
+     * @return
+     * @throws Exception
+     */
+    public Users create() throws Exception {
         // encrypt user password
         String encryptedPwd = bCryptPasswordEncoder.encode("admin");
+        // mocking user details for login etc
         Users user = Users.builder()
-                .username("admin")
-                .fullname("John Doe")
-                .businessUnit("Ebene BU - RB000235")
-                .contactNumber("9034 8721")
+                .username("jack")
+                .fullname("Jack Reacher")
+                .businessUnit("MCBU-RB000236")
+                .contactNumber("8098 8721")
                 .password(encryptedPwd)
                 .role(Role.USER)
                 .build();
