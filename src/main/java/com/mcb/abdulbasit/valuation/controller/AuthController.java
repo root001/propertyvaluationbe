@@ -1,8 +1,8 @@
 package com.mcb.abdulbasit.valuation.controller;
 
 import com.mcb.abdulbasit.valuation.constant.AppConstants;
-import com.mcb.abdulbasit.valuation.model.AuthRequest;
-import com.mcb.abdulbasit.valuation.model.AuthResponse;
+import com.mcb.abdulbasit.valuation.model.dto.AuthRequest;
+import com.mcb.abdulbasit.valuation.model.dto.AuthResponse;
 import com.mcb.abdulbasit.valuation.service.AuthService;
 import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;

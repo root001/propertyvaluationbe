@@ -11,6 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 public class File extends BaseEntity {
     @NonNull
+    @Column
     @Enumerated(EnumType.STRING)
     private DocType docType;
     @NonNull

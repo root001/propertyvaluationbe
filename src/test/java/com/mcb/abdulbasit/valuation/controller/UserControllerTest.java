@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockServletContext;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -51,6 +52,7 @@ class UserControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "test_user", password = "admin")
     void given_that_users_exist_return_all_users() throws Exception {
         List<Users> userList = EasyRandomUtils.mock(Users.class, 5);
 
@@ -69,6 +71,7 @@ class UserControllerTest {
     }
 
     @Test
+    @WithMockUser(username = "test_user", password = "admin")
     void given_that_user_exist_return_success_and_user_data() throws Exception {
         Users user = EasyRandomUtils.mock(Users.class);
 

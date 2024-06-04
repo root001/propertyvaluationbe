@@ -1,8 +1,9 @@
 package com.mcb.abdulbasit.valuation.service;
 
 import com.mcb.abdulbasit.valuation.common.JwtHelper;
-import com.mcb.abdulbasit.valuation.model.AuthRequest;
-import com.mcb.abdulbasit.valuation.model.AuthResponse;
+import com.mcb.abdulbasit.valuation.enums.Role;
+import com.mcb.abdulbasit.valuation.model.dto.AuthRequest;
+import com.mcb.abdulbasit.valuation.model.dto.AuthResponse;
 import com.mcb.abdulbasit.valuation.model.Users;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,5 +1,6 @@
 package com.mcb.abdulbasit.valuation.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mcb.abdulbasit.valuation.constant.AppConstants;
 import com.mcb.abdulbasit.valuation.model.Users;
 import com.mcb.abdulbasit.valuation.service.UserService;
@@ -39,6 +40,11 @@ public class UserController {
         if(id < 0)
             throw new IllegalArgumentException("Illegal id provided.");
         return ResponseEntity.ok(userService.getUser(id) );
+    }
+
+    @GetMapping("/save")
+    public ResponseEntity<Users> save() throws Exception {
+        return ResponseEntity.ok(userService.save() );
     }
 
 }

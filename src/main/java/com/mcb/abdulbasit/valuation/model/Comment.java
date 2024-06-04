@@ -11,9 +11,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Comment extends BaseEntity {
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Users user;
     @NonNull
     private String body;
 

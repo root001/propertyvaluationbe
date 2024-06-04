@@ -2,7 +2,10 @@ package com.mcb.abdulbasit.valuation.model;
 
 import com.mcb.abdulbasit.valuation.entity.BaseEntity;
 import com.mcb.abdulbasit.valuation.enums.Role;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,6 +25,7 @@ public class Users extends BaseEntity implements UserDetails{
     private String username;
     @NonNull
     private String password;
+    @Enumerated(EnumType.STRING)
     private Role role;
     private String fullname;
     private String businessUnit;

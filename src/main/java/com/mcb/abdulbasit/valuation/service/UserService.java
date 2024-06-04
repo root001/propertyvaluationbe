@@ -1,11 +1,16 @@
 package com.mcb.abdulbasit.valuation.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mcb.abdulbasit.valuation.enums.Role;
 import com.mcb.abdulbasit.valuation.model.Users;
 import com.mcb.abdulbasit.valuation.repository.UserRepository;
 import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,9 +18,11 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * getAllUsers
@@ -59,6 +66,23 @@ public class UserService {
 
             return new Users(username, user.getPassword());
         };
+    }
+
+    public Users save() throws Exception {
+        // encrypt user password
+        String encryptedPwd = bCryptPasswordEncoder.encode("admin");
+        Users user = Users.builder()
+                .username("admin")
+                .fullname("John Doe")
+                .businessUnit("Ebene BU - RB000235")
+                .contactNumber("9034 8721")
+                .password(encryptedPwd)
+                .role(Role.USER)
+                .build();
+
+        ObjectMapper mapper  = new ObjectMapper();
+        log.info("user details : {}", mapper.writeValueAsString(user));
+        return userRepository.save(user);
     }
 
 }

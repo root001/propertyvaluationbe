@@ -1,4 +1,4 @@
-package com.mcb.abdulbasit.valuation.model;
+package com.mcb.abdulbasit.valuation.model.dto;
 
 import java.time.LocalDateTime;
 

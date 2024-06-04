@@ -6,8 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.Locale;
 import java.util.Objects;
 
 @Data
@@ -19,10 +21,10 @@ public abstract class BaseEntity {
     @SequenceGenerator(name = "id_generator", sequenceName = "id_seq")
     private Integer id;
 
-    @CreatedDate
+//    @CreatedDate
     private LocalDateTime createdAt;
 
-    @LastModifiedDate
+//    @LastModifiedDate
     private LocalDateTime updatedAt;
 
     @Override
@@ -36,5 +38,15 @@ public abstract class BaseEntity {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    @PrePersist
+    void preSave() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
     }
 }
