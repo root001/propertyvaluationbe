@@ -7,6 +7,7 @@ import com.mcb.abdulbasit.valuation.model.dto.FacilityResponse;
 import com.mcb.abdulbasit.valuation.repository.FacilityRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
@@ -70,10 +71,10 @@ public class FacilityService {
         DecimalFormat mFormat = new DecimalFormat("00");
         String monthStr = mFormat.format(Double.valueOf(currMonth));
 
-        Optional<String> lastFacilityReference = facilityRepository.findLastFacilityReference();
+        String lastFacilityReference = facilityRepository.findFosReferenceNo();
 
-        if (lastFacilityReference.isPresent()) {
-            String lastFacilitySeq = lastFacilityReference.get().substring(lastFacilityReference.get().lastIndexOf("/")+1);
+        if (StringUtils.isNotEmpty(lastFacilityReference) ){
+            String lastFacilitySeq = lastFacilityReference.substring(lastFacilityReference.lastIndexOf("/")+1);
 
             int nextFacilityRefSeq = Integer.parseInt(lastFacilitySeq) + 1;
 

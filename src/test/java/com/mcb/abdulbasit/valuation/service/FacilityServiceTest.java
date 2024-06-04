@@ -1,6 +1,7 @@
 package com.mcb.abdulbasit.valuation.service;
 
 import com.mcb.abdulbasit.valuation.repository.FacilityRepository;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +31,7 @@ class FacilityServiceTest {
     void testFacilityReferenceFormatWhenNoLatestInRepository(){
         //expected format : YYYY/MM/XXXX
         var expected = "2024/06/0001";
-        when(facilityRepository.findLastFacilityReference()).thenReturn(Optional.empty());
+        when(facilityRepository.findFosReferenceNo()).thenReturn(StringUtils.EMPTY);
 
         var actual = facilityService.createFacilityReference();
 
@@ -41,7 +42,7 @@ class FacilityServiceTest {
     void testFacilityReferenceFormatWhenLatestInRepositoryExists(){
         //expected format : YYYY/MM/XXXX
         var expected = "2024/06/0002";
-        when(facilityRepository.findLastFacilityReference()).thenReturn(Optional.of("2024/06/0001"));
+        when(facilityRepository.findFosReferenceNo()).thenReturn("2024/06/0001");
 
         var actual = facilityService.createFacilityReference();
 

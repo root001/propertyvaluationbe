@@ -5,11 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
 public interface FacilityRepository extends JpaRepository<Facility, Integer> {
 
-    @Query("select fosReferenceNo from facility order by created_at desc limit 1")
-    Optional<String> findLastFacilityReference();
+    @Query(value = "SELECT fosReferenceNo FROM facility order by created_at desc limit 1", nativeQuery = true)
+    String findFosReferenceNo();
 }
