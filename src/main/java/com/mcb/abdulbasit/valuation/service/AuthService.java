@@ -32,6 +32,6 @@ public class AuthService {
 
         var jwt = jwtHelper.generateTokenForUser(user);
 
-        return new AuthResponse(jwt, jwtHelper.getTokenExpiration(jwt));
+        return new AuthResponse(jwt, jwtHelper.getTokenExpiration(jwt), loginUser.getId(), loginUser.getUsername());
     }
 }

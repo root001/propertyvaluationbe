@@ -35,10 +35,10 @@ public class UserController {
      * @return
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Users> findUser(@PathVariable String id) {
-        if(StringUtils.isEmpty(id) )
-        throw new IllegalArgumentException("Illegal id provided.");
-        return ResponseEntity.ok(userService.getUser(Integer.getInteger(id)) );
+    public ResponseEntity<Users> findUser(@PathVariable Integer id) {
+        if(id < 0)
+            throw new IllegalArgumentException("Illegal id provided.");
+        return ResponseEntity.ok(userService.getUser(id) );
     }
 
 }

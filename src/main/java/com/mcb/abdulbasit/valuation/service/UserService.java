@@ -31,7 +31,7 @@ public class UserService {
      * @return
      */
     public Users getUser(Integer id){
-        if(id > 0)
+        if(id < 0)
             throw new IllegalArgumentException("user id cannot be null or empty.");
         Optional<Users> user = userRepository.findById(id);
         if(!user.isPresent()){
