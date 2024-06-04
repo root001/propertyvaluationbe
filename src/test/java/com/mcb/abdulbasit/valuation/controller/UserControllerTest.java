@@ -69,6 +69,20 @@ class UserControllerTest {
     }
 
     @Test
-    void findUser() {
+    void given_that_user_exist_return_success_and_user_data() throws Exception {
+        Users user = EasyRandomUtils.mock(Users.class);
+
+        when(userService.getUser(someid)).thenReturn(user);
+        final var result = mockMvc.perform(get("/api/v1/users/{id}", someid)
+                        .contextPath("/api")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
+                .andExpect(status().is2xxSuccessful())
+                .andReturn();
+
+        final var response = mapper.readValue(result.getResponse().getContentAsString(), Users.class);
+
+        Assertions.assertThat(response).isEqualTo(user);
+
     }
 }

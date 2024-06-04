@@ -1,5 +1,6 @@
 package com.mcb.abdulbasit.valuation.controller;
 
+import com.mcb.abdulbasit.valuation.constant.AppConstants;
 import com.mcb.abdulbasit.valuation.model.Users;
 import com.mcb.abdulbasit.valuation.service.UserService;
 import io.micrometer.common.util.StringUtils;
@@ -12,10 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static com.mcb.abdulbasit.valuation.constant.AppConstants.USER;
-
 @RestController
-@RequestMapping(USER)
+@RequestMapping(AppConstants.USER)
 @RequiredArgsConstructor
 public class UserController {
 
